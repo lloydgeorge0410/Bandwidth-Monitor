@@ -1,0 +1,57 @@
+name: backend
+
+on:
+  pull_request:
+    paths:
+      - 'backend/**'
+
+jobs:
+  lint:
+    name: Lint with Ruff
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$HOME/.local/bin:$PATH"
+
+      - name: Install Dependencies and Run Ruff
+        run: |
+          cd "backend"
+          poetry install
+          poetry run ruff check .
+
+  test:
+    name: Test with Pytest
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          export PATH="$HOME/.local/bin:$PATH"
+
+      - name: Install Dependencies and Run Pytest
+        run: |
+          cd "backend"
+          poetry install
+          poetry run pytest
