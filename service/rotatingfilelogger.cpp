@@ -62,11 +62,6 @@ void RotatingFileLogger::messageHandler(QtMsgType type,
     QTextStream textStream(&logFile);
     textStream << formattedMessage << "\n";
     textStream.flush();
-
-    // Also output to console in debug mode
-#ifdef QT_DEBUG
-    fprintf(stderr, "%s\n", qPrintable(formattedMessage));
-#endif
 }
 
 QString RotatingFileLogger::formatMessage(QtMsgType type,
@@ -97,16 +92,7 @@ QString RotatingFileLogger::formatMessage(QtMsgType type,
 
     // Format with source info if available
     QString result;
-    if (context.file && context.function) {
-        result = QString("[%1] [%2] %3 (%4:%5, %6)")
-        .arg(timestamp, levelStr, msg,
-             QString(context.file),
-             QString::number(context.line),
-             QString(context.function));
-    } else {
-        result = QString("[%1] [%2] %3")
-        .arg(timestamp, levelStr, msg);
-    }
+    result = QString("[%1] [%2] %3").arg(timestamp, levelStr, msg);
 
     return result;
 }
