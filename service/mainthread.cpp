@@ -11,11 +11,14 @@ MainThread::MainThread(QObject *parent) : QThread(parent)
 
 bool checkInternetConnection() {
     if (!QNetworkInformation::loadDefaultBackend()) {
+        qDebug() << "There is no available backend.";
         return false;
     }
     if (QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online) {
+        qDebug() << "Online";
         return true;
     }
+    qDebug() << "Offline";
     return false;
 }
 
@@ -37,6 +40,7 @@ void MainThread::run()
             }
             thread = new MonitorThread;
             thread->start();
+            thread->wait();
         }
         else if(!checkInternetConnection() && thread != NULL)
         {
