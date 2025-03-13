@@ -85,7 +85,7 @@ describe("logMessageFormat", () => {
     const info: winston.Logform.TransformableInfo = {
       timestamp: "2023-01-01 12:00:00",
       level: "info",
-      message: undefined as any,
+      message: undefined,
     };
 
     // Act
@@ -147,7 +147,7 @@ describe("logMessageFormat", () => {
     const info: winston.Logform.TransformableInfo = {
       level: "info",
       message: "No timestamp",
-    } as any;
+    };
 
     // Act
     const result = logMessageFormat(info);

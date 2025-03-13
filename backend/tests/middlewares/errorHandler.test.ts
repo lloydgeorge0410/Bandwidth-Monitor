@@ -72,7 +72,7 @@ describe("Error Handler Middleware", () => {
   it("should handle non-Error objects", () => {
     // Setup
     mockResponse.headersSent = false;
-    const nonErrorObject = { message: "Not a standard error" } as any;
+    const nonErrorObject = { message: "Not a standard error" } as Error;
 
     // Execute
     errorHandler(nonErrorObject, mockRequest as Request, mockResponse as Response, nextFunction);
