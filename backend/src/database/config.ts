@@ -12,7 +12,7 @@ export default new DataSource({
   password: ENV.DB_PASSWORD,
   database: ENV.DB_NAME,
   entities: ["src/entities/**/*.ts"],
-  migrations: ["src/migrations/**/*.ts"],
+  migrations: ["migrations/**/*.ts"],
   logging: true,
   logger: new WinstonAdaptor(Logger, "all"),
 });
