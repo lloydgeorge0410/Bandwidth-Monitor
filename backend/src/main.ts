@@ -8,7 +8,7 @@ const startServer = async () => {
     app.listen(ENV.PORT, ENV.HOST, () => {
       Logger.info(`Server is running at http://${ENV.HOST}:${ENV.PORT}.`);
     });
-  });  
+  });
 };
 
 startServer();
